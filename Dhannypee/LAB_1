@@ -1,4 +1,4 @@
-/The code is to activate an LED with name command 
+//The code is to activate an LED with name command 
 void setup() 
 {
 pinMode(D4, OUTPUT);
