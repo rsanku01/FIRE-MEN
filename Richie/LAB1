@@ -1,0 +1,27 @@
+int letter;
+int R;
+int E;
+void setup() {
+  // put your setup code here, to run once:
+  pinMode(D4, OUTPUT);
+  Serial.begin(230400);
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+ 
+  
+if(Serial.available()>0)
+{
+   letter = Serial.read();
+  if (letter == 'R')
+  {Serial.println("LED is ON");
+  digitalWrite(D4, LOW);
+  }
+  else if (letter == 'E')
+  {
+  Serial.println("LED is OFF");
+  digitalWrite(D4, HIGH);
+  }
+}
+}
