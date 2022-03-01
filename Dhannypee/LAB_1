@@ -1,0 +1,26 @@
+/The code is to activate an LED with name command 
+void setup() 
+{
+pinMode(D4, OUTPUT);
+digitalWrite(D4, HIGH);
+
+Serial.begin(230400);
+}
+
+void loop() 
+{
+  if (Serial.available() > 0)
+  {
+  int letter = Serial.read();
+  if (letter == 'D')
+  {
+    Serial.println("The LED is ON");
+    digitalWrite(D4, LOW);
+  }
+  else if (letter == 'L')
+  {
+    Serial.println("The LED is OFF");
+    digitalWrite(D4,HIGH);
+  }
+  }
+}
