@@ -1,7 +1,6 @@
 //The code is to detect the presence of LPG in a compartment
 
 #define Gas_Sensor D1
-//#define Smoke_Sensor D2
 #define redpin D3
 #define greenpin D4
 #define bluepin D5
