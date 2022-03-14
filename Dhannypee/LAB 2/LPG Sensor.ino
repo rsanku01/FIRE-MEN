@@ -1,17 +1,16 @@
-//The code is to detect the presence of LPG in a compartment
+//The code is to detect the presence of LPG in a compartment then triger the safety system
 
-#define Gas_Sensor D1
-#define redpin D3
-#define greenpin D4
-#define bluepin D5
-#define Buzzer D6
+#define Gas_Sensor D1 //LPG Sensor
+#define redpin D3 
+#define greenpin D4 
+#define bluepin D5 
+#define Buzzer D6 
 
 #include "pitches.h"
   
 int val;
 
 void setup() {
-  // put your setup code here, to run once:
 Serial.begin(230400);
 pinMode(Gas_Sensor, INPUT);
 pinMode(redpin, OUTPUT);
@@ -33,6 +32,7 @@ void loop() {
     Serial.println("Gas is detected"); //Display the state of the sensors
     Serial.println("Gas alarm is triggered"); // Trigger on the Alarm system
     delay(1000);
+    //The alarm system produces a Siren Warning Sound (buzzer sound + flashing RGB LED).
     for (val=0; val<50; val++)
     {
       analogWrite(redpin,val);
