@@ -74,7 +74,7 @@ void loop() {
   {
    if (Air_Quality_int>=2000)
   {
-    Serial.println("Class C type of Fire. Gas Fire");
+    Serial.println("Class C type of Fire: Gas Fire");
     Serial.println("ABC Fire Extinguisher is released");
     digitalWrite(GREEN_LED, HIGH);
     delay(2000);
@@ -85,7 +85,7 @@ void loop() {
     else if (Electrical == 0)
     {
      Elec = 1;
-     Serial.println("Class E type of Fire. Electrical Fire");
+     Serial.println("Class E type of Fire: Electrical Fire");
      Serial.println("CO2 Fire Extinguisher is released");
      Serial.println("Seal Area");
      digitalWrite(RED_LED, HIGH);
@@ -96,7 +96,7 @@ void loop() {
     else 
     {
       water = 1;
-      Serial.println("Class A type of Fire. Other Fire");
+      Serial.println("Class A type of Fire: Other Fire");
       digitalWrite(BLUE_LED, HIGH);
       delay(2000);
       digitalWrite(BLUE_LED, LOW);
@@ -114,9 +114,10 @@ void loop() {
 
 //Extractor Fan
 if ((Class_Variable_int == 0) && (Smoke_Sensor_int == 1))
-{ // move from 0 to 180 degrees with a positive angle of 1
+{ 
   Extractor = 1;
   Serial.println("Extractor fan is ON");
+ // move from 0 to 180 degrees with a positive angle of 1
   for(angle = 0; angle < 180; angle += 1)
   {                          
     myservo.write(angle);
