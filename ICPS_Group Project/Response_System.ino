@@ -72,7 +72,7 @@ void loop() {
  Electrical = digitalRead(Electrical_Connectivity);
  if (Class_Variable_int == 1)
   {
-   if (Air_Quality_int>=2000)
+   if (Air_Quality_int>=2000) //This range is determined by calibrating the sensor at standard condition when LPG was introduced.
   {
     Serial.println("Class C type of Fire: Gas Fire");
     Serial.println("ABC Fire Extinguisher is released");
