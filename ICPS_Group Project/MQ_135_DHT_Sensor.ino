@@ -48,6 +48,7 @@ char val[16]; //it stores a number composed by up to 16 characters
 
 void loop()
 {
+ //The MQ_135 Gas Sensor depends on the temperature and humidity of the air to measure the quality of air in PPM
   float temperature = dht.readTemperature();//sensors.getTempCByIndex(0); // Assume current temperature. Recommended to measure with DHT22
   float humidity = dht.readHumidity(); // Assume current humidity. Recommended to measure with DHT22
   float rzero = mq135_sensor.getRZero();
@@ -63,7 +64,7 @@ void loop()
   Serial.println("ppm");
   delay(500);
   int Smoke_Present = correctedPPM;
-  if ((Smoke_Present >=300) && (Smoke_Present <=900))
+  if ((Smoke_Present >=300) && (Smoke_Present <=900)) //This range is determined by calibrating the sensor at standard condition when smoke was introduced.
   {
     smoke = 1;
     Serial.println("Smoke is Present");
