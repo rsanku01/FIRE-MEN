@@ -44,7 +44,6 @@ void loop() {
     alarm = 1;
     Serial.println("Alarm is triggered"); // Trigger on the Alarm system
     Serial.println("Alarm System is ON....");
-    digitalWrite(Alarm_LED, HIGH);
     //Alarm System
     Serial.println("Alarm is triggered"); // Trigger on the Alarm system
     delay(1000);
