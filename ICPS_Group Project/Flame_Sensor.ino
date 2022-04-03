@@ -43,6 +43,7 @@ void loop() {
   else 
   {
     Serial.println("Flame is detected"); //Display the state of the sensors
+    delay(2000);
     Class_Variable = 1; //Variable to determine the class of fire
   }
 //Sending Values to Server
