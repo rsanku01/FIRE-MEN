@@ -1,0 +1,58 @@
+pragma solidity >=0.5.0 <0.8.0;
+
+contract Factory { //E1
+
+uint idDigits = 16; //E2
+uint idModulus = 10 ** idDigits; //equal to 10^2 //E3
+
+struct Product { //E4
+    string name;
+    uint id;
+}
+
+Product[] public products;//E5 dynamic, public array
+
+function _createProduct( string memory _name, uint _id) private { //E6
+    Product(_name, _id); //should I use square brackets?
+}
+
+function _generateRandomId(string memory _str) private returns (uint) { //E7
+    uint rand = uint(keccak256(abi.encodePacked(_str))); //E8
+    return rand% idModulus; //E8
+}
+
+function createRandomProduct(string memory _name) public { //E8
+    uint randId = _generateRandomId(_name);
+    _createProduct( _name, randId);
+}
+
+event NewProduct(uint ArrayProductId, string name, uint id);
+
+function _createProduct(uint _ArrayProductId, string memory _name, uint _id) private { //E6
+    Product(_name, _id); //should I use square brackets?
+    emit NewProduct(_ArrayProductId, _name, _id); //E9
+}
+
+mapping (address => uint) public productToOwner;
+
+mapping (address => uint) ownerProductCount;
+
+function Ownership(uint _productToOwner, uint _ownerProductCount) public {
+    productToOwner[msg.sender] = _productToOwner;
+    ownerProductCount[msg.sender]++;
+}
+
+function getProductsByOwner(address _owner) external view {
+    uint counter = 0;
+    uint[] memory result;
+    result = ownerProductCount;
+    for (uint i= 0; i < products.length; i++){
+        if (productToOwner = _owner) {
+            result[counter]=i;
+            counter++;
+        }
+    }
+    return result;
+}
+
+}
