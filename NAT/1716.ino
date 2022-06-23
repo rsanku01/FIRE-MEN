@@ -13,7 +13,7 @@ float SP = 20;
 char GetData[50];
 char GetPatameters[50];
 int n = 0;
-float pv, pv, t, Kp;
+float pv, cp, t, Kp;
 int on_off = 1;
 char UpdateParameters[50];
 float GetPar = 0;
@@ -119,7 +119,7 @@ void callback (char* topic, byte* payload, unsigned int length) {
     float New_Kp, New_Ti, New_Td;
     sscanf(inmsg, "%f;%f;%f;%f", &SP, &New_Kp, &New_Ti, &New_Td);
     nat.update_constants(New_Kp, New_Ti, New_Td);
-    client.subscribe(topic_updtae_parameters);
+    client.subscribe(topic_update_parameters);
   }
 
   if (String(topic) == topic_get_parameters) {
@@ -161,7 +161,7 @@ void callback (char* topic, byte* payload, unsigned int length) {
     }
     inmsg4[length] = '\0';
 
-//    float SP,PV, CP, T;
+
     snprintf(inmsg4, "%f;%f;%f;%f", SP, pv, cp, t);
     client.publish(topic_data);
     client.subscribe(topic_data);
