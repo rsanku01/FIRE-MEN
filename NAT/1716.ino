@@ -5,7 +5,6 @@
 #include <PubSubClient.h>
 #include <stdio.h>
 
-float ReadSensorValue;
 char data;
 char OutputPump;
 float DerivedValue, IntegralValue;
@@ -13,7 +12,9 @@ float SP = 20;
 char GetData[50];
 char GetPatameters[50];
 int n = 0;
-float pv, cp, Kp;
+float pv=20;
+float cp=20;
+float Kp=20;
 int on_off = 1;
 char UpdateParameters[50];
 float GetPar = 0;
@@ -57,7 +58,7 @@ float x;
 class PID
 {
   public:
-    float c1, c2, c3, N, ts, kp, ti, td, pv, cp, t, integral, derived, error;
+    float c1, c2, c3, N, ts, kp, ti, td, integral, derived, error;
     void update_constants (float k_, float ti_, float td_);
     float get_control_action (float error_k);
     PID (float N_, float tc_, float kc_, float ts_)
@@ -177,7 +178,7 @@ void callback (char* topic, byte* payload, unsigned int length) {
     inmsg5[length] = '\0';
     float Kp, Ti, Td;
     snprintf(inmsg, "%f;%f;%f;%f;%i", &SP, &Kp, &Ti, &Td, &on_off);
-    client.publish(topic_parameters);
+   // client.publish(topic_parameters);
     client.subscribe(topic_parameters);
   }
 
