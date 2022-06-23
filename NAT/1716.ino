@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <stdlib.h>
 #include <string.h>
@@ -14,7 +13,7 @@ float SP = 20;
 char GetData[50];
 char GetPatameters[50];
 int n = 0;
-//float PV, CP, T, Kp;
+float pv, pv, t, Kp;
 int on_off = 1;
 char UpdateParameters[50];
 float GetPar = 0;
@@ -120,6 +119,7 @@ void callback (char* topic, byte* payload, unsigned int length) {
     float New_Kp, New_Ti, New_Td;
     sscanf(inmsg, "%f;%f;%f;%f", &SP, &New_Kp, &New_Ti, &New_Td);
     nat.update_constants(New_Kp, New_Ti, New_Td);
+    client.subscribe(topic_updtae_parameters);
   }
 
   if (String(topic) == topic_get_parameters) {
@@ -131,6 +131,7 @@ void callback (char* topic, byte* payload, unsigned int length) {
     GetPar = inmsg2[0];
     char Send_Parameters[50];
     snprintf(Send_Parameters, 50, "%f;%f;%f;%f;%i", SP, nat.kp, nat.ti, nat.td, on_off);
+    client.subscribe(topic_get_parameters);
     client.publish(topic_parameters, Send_Parameters, topic_data);
   }
 
@@ -146,6 +147,7 @@ void callback (char* topic, byte* payload, unsigned int length) {
     char Send_Parameters[50];
     snprintf(Send_Parameters, 50, "%i;%i", 0, 1);
     client.publish(topic_parameters, Send_Parameters, topic_data);
+    client.subscribe(topic_on_off);
   }
   //  inmsg3[length] = '\0';
   //  on_off = inmsg3[0];
@@ -160,8 +162,9 @@ void callback (char* topic, byte* payload, unsigned int length) {
     inmsg4[length] = '\0';
 
 //    float SP,PV, CP, T;
-    snprintf(inmsg4, "%f;%f;%f;%f", SP, nat.pv, nat.cp, nat.t);
+    snprintf(inmsg4, "%f;%f;%f;%f", SP, pv, cp, t);
     client.publish(topic_data);
+    client.subscribe(topic_data);
 
   }
 
@@ -175,6 +178,7 @@ void callback (char* topic, byte* payload, unsigned int length) {
     float Kp, Ti, Td;
     snprintf(inmsg, "%f;%f;%f;%f;%i", &SP, &Kp, &Ti, &Td, &on_off);
     client.publish(topic_parameters);
+    client.subscribe(topic_parameters);
   }
 
 }
