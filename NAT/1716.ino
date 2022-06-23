@@ -13,12 +13,12 @@ float SP = 20;
 char GetData[50];
 char GetPatameters[50];
 int n = 0;
-float pv, cp, t, Kp;
+float pv, cp, Kp;
 int on_off = 1;
 char UpdateParameters[50];
 float GetPar = 0;
 float N = 20;
-float Time = 1;
+float Time = 1000;
 
 
 const char* ssid = "udcdocencia";
@@ -162,7 +162,7 @@ void callback (char* topic, byte* payload, unsigned int length) {
     inmsg4[length] = '\0';
 
 
-    snprintf(inmsg4, "%f;%f;%f;%f", SP, pv, cp, t);
+    snprintf(inmsg4, "%f;%f;%f;%f", SP, pv, cp, Time);
     client.publish(topic_data);
     client.subscribe(topic_data);
 
