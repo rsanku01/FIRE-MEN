@@ -198,6 +198,8 @@ void loop() {
   v = analogRead(A0) * 100 / 1023;
   error = 50 - v;
   x = nat.get_control_action(error);
+  pv=v;
+  cp=x;
   analogWrite(D3, error * 1023 / 100 * on_off);
   Serial.println();
   delay(500);
