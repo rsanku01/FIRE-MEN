@@ -6,7 +6,7 @@
 #include <stdio.h>
 
 
-char data;
+char data;                                                                //defining the values
 char OutputPump;
 float DerivedValue, IntegralValue;
 float SP = 20;
@@ -35,7 +35,7 @@ const char* topic_data = "plant3/data";
 const char* topic_parameters = "plant3/parameters";
 
 
-void setup_wifi() {
+void setup_wifi() {                                                        //setting up the wifi
   delay(10);
   WiFi.begin ("udcdocencia", "Universidade.2022");                        //connect the board with internet
   while (WiFi.status() != WL_CONNECTED) {
@@ -46,7 +46,7 @@ void setup_wifi() {
 }
 
 
-float error;                                                             // PID
+float error;                                                             // PID flow
 float v;
 float x;
 
